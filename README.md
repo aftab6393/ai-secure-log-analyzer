@@ -6,7 +6,7 @@ An intelligent log analysis system that detects sensitive data, classifies risks
 ---
 ## 🌐 Live Application
 
-👉 https://ai-secure-log-analyzer.onrender.com
+👉 https://ai-secure-log-analyzer-8h8w.onrender.com
 
 ![Screenshot](image.png)
 
