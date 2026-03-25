@@ -8,6 +8,8 @@ An intelligent log analysis system that detects sensitive data, classifies risks
 
 👉 https://ai-secure-log-analyzer.onrender.com
 
+![Screenshot](images/image.png)
+
 
 
 ## ✨ Features
@@ -42,6 +44,7 @@ An intelligent log analysis system that detects sensitive data, classifies risks
   "insights": [
     "Sensitive credentials exposed",
     "Stack trace reveals internal system details"
+
   ]
 }
 

@@ -8,200 +8,168 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
 
-/* BODY */
 body {
-    display: flex;
-    background: radial-gradient(circle, #0f172a, #020617);
-    color: white;
-    transition: 0.3s;
+    display:flex;
+    background: radial-gradient(circle,#0f172a,#020617);
+    color:white;
+    transition:0.3s;
 }
 
 /* LIGHT MODE */
 body.light {
-    background: #f1f5f9;
-    color: black;
+    background:#f1f5f9;
+    color:black;
 }
+body.light .card { background:white; color:black; }
+body.light textarea { background:#e2e8f0; color:black; }
 
 /* SIDEBAR */
 .sidebar {
-    width: 220px;
-    height: 100vh;
-    background: rgba(2,6,23,0.9);
-    padding: 20px;
-    border-right: 1px solid #1e293b;
-}
-
-.sidebar h2 {
-    margin-bottom: 20px;
+    width:220px;
+    height:100vh;
+    background:#020617;
+    padding:20px;
 }
 
 .sidebar button {
-    margin-top: 20px;
+    margin-top:15px;
 }
 
 /* MAIN */
-.main {
-    flex: 1;
-    padding: 20px;
-}
+.main { flex:1; padding:20px; }
 
-/* HEADER */
-.header {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-/* GRID */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:20px;
 }
 
 /* CARD */
 .card {
-    background: rgba(2,6,23,0.7);
-    backdrop-filter: blur(10px);
-    padding: 15px;
-    border-radius: 16px;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
+    background:#020617;
+    padding:15px;
+    border-radius:12px;
 }
 
 /* INPUT */
 textarea {
-    width: 100%;
-    height: 120px;
-    background: #0f172a;
-    border-radius: 10px;
-    border: none;
-    padding: 10px;
-    color: white;
+    width:100%;
+    height:120px;
+    background:#0f172a;
+    border:none;
+    border-radius:10px;
+    padding:10px;
+    color:white;
 }
 
 /* BUTTON */
 button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: none;
-    background: linear-gradient(135deg, #6366f1, #22c55e);
-    color: white;
-    cursor: pointer;
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#6366f1,#22c55e);
+    color:white;
+    cursor:pointer;
 }
 
 /* BADGE */
-.badge {
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-weight: bold;
-}
-
-.high { background: red; }
-.medium { background: orange; }
-.low { background: green; }
+.badge { padding:5px 10px; border-radius:8px; font-weight:bold; }
+.high { background:red; }
+.medium { background:orange; }
+.low { background:green; }
 
 /* FINDINGS */
 .finding {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    margin: 5px 0;
-    background: #0f172a;
-    border-radius: 8px;
+    display:flex;
+    justify-content:space-between;
+    padding:6px;
+    margin:5px 0;
+    background:#0f172a;
+    border-radius:8px;
 }
 
 /* ACTIVITY */
 #activity {
-    max-height: 150px;
-    overflow-y: auto;
-    font-size: 12px;
-}
-
-/* LOADER */
-.loader {
-    display: none;
-    text-align: center;
-    margin-top: 10px;
+    max-height:150px;
+    overflow-y:auto;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
-    <h2>🔐 AI Analyzer</h2>
-    <button onclick="toggleTheme()">Toggle Theme</button>
+<h2>🔐 AI Analyzer</h2>
+<button onclick="toggleTheme()">Toggle Theme</button>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-<div class="header">🚀 AI Secure Log Analyzer</div>
+<h2>🚀 AI Secure Log Analyzer</h2>
 
 <div class="grid">
 
 <!-- INPUT -->
 <div class="card">
-    <h3>📂 Logs</h3>
-    <input type="file" id="file">
-    <textarea id="log" placeholder="Paste logs..."></textarea>
-    <button onclick="analyze()">Analyze</button>
+<h3>📂 Logs</h3>
+<textarea id="log" placeholder="Paste logs..."></textarea>
+<button onclick="analyze()">Analyze</button>
 </div>
 
 <!-- SUMMARY -->
 <div class="card">
-    <h3>📊 Summary</h3>
-    <p id="summary">No data</p>
+<h3>📊 Summary</h3>
+<p id="summary"></p>
 </div>
 
 <!-- RISK -->
 <div class="card">
-    <h3>⚠ Risk</h3>
-    <span id="riskLevel" class="badge">-</span>
-    <p>Score: <span id="riskScore">0</span></p>
+<h3>⚠ Risk</h3>
+<span id="riskLevel" class="badge"></span>
+<p>Score: <span id="riskScore"></span></p>
 </div>
 
 <!-- FINDINGS -->
 <div class="card">
-    <h3>🔍 Findings</h3>
-    <div id="findings"></div>
+<h3>🔍 Findings</h3>
+<div id="findings"></div>
 </div>
 
 <!-- INSIGHTS -->
 <div class="card">
-    <h3>🤖 Insights</h3>
-    <ul id="insights"></ul>
+<h3>🤖 Insights</h3>
+<ul id="insights"></ul>
 </div>
 
 <!-- CHART -->
 <div class="card">
-    <h3>📈 Risk Chart</h3>
-    <canvas id="chart"></canvas>
+<h3>📈 Risk Chart</h3>
+<canvas id="chart"></canvas>
 </div>
 
 <!-- ACTIVITY -->
 <div class="card">
-    <h3>🕒 Activity</h3>
-    <div id="activity"></div>
+<h3>🕒 Activity</h3>
+<div id="activity"></div>
+</div>
+
+<!-- AI -->
+<div class="card">
+<h3>🧠 AI Detection</h3>
+<div id="ai"></div>
+</div>
+
+<!-- THREATS -->
+<div class="card">
+<h3>🚨 Detected Attacks</h3>
+<div id="threats"></div>
 </div>
 
 </div>
-
-<div class="loader" id="loader">Analyzing...</div>
 
 </div>
 
@@ -215,98 +183,86 @@ function toggleTheme() {
 // CHART
 let chart;
 window.onload = function() {
-    const ctx = document.getElementById("chart");
-    chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [{
-                label: "Risk",
-                data: [],
-                borderWidth: 2
-            }]
-        }
+    chart = new Chart(document.getElementById("chart"), {
+        type:'line',
+        data:{ labels:[], datasets:[{ label:"Risk", data:[] }] }
     });
 };
 
-// ANALYZE (UNCHANGED)
+// ANALYZE
 function analyze() {
-    const fileInput = document.getElementById("file").files[0];
     const log = document.getElementById("log").value;
 
-    document.getElementById("loader").style.display = "block";
-
-    if (fileInput) {
-        const formData = new FormData();
-        formData.append("file", fileInput);
-
-        fetch("/analyze", {
-            method: "POST",
-            body: formData
-        })
-        .then(res => res.json())
-        .then(updateUI)
-        .catch(showError);
-
-    } else {
-        fetch("/analyze", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                input_type: "log",
-                content: log
-            })
-        })
-        .then(res => res.json())
-        .then(updateUI)
-        .catch(showError);
-    }
+    fetch("/analyze",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({content:log})
+    })
+    .then(res=>res.json())
+    .then(updateUI);
 }
 
-// UPDATE UI (ENHANCED)
+// UPDATE UI
 function updateUI(data) {
-    document.getElementById("loader").style.display = "none";
 
     document.getElementById("summary").innerText = data.summary;
 
     let badge = document.getElementById("riskLevel");
-    badge.innerText = data.risk_level.toUpperCase();
+    badge.innerText = data.risk_level;
     badge.className = "badge " + data.risk_level;
 
     document.getElementById("riskScore").innerText = data.risk_score;
 
     // FINDINGS
-    let findingsHTML = "";
-    data.findings.forEach(f => {
-        findingsHTML += `<div class="finding">
-            <span>${f.type}: ${f.value}</span>
-            <span class="badge ${f.risk}">${f.risk}</span>
-        </div>`;
+    let fHTML="";
+    data.findings.forEach(f=>{
+        fHTML+=`<div class="finding">
+        <span>${f.type}</span>
+        <span class="badge ${f.risk}">${f.risk}</span></div>`;
     });
-    document.getElementById("findings").innerHTML = findingsHTML;
+    document.getElementById("findings").innerHTML=fHTML;
 
     // INSIGHTS
-    let insightsHTML = "";
-    data.insights.forEach(i => {
-        insightsHTML += `<li>${i}</li>`;
+    let iHTML="";
+    data.insights.forEach(i=>{
+        iHTML+=`<li>${i}</li>`;
     });
-    document.getElementById("insights").innerHTML = insightsHTML;
+    document.getElementById("insights").innerHTML=iHTML;
 
-    // CHART UPDATE
+    // AI
+    let aiHTML="";
+    if(data.ai_detection && data.ai_detection.length>0){
+        data.ai_detection.forEach(a=>{
+            aiHTML+=`<div>${a}</div>`;
+        });
+    } else {
+        aiHTML="No anomalies detected";
+    }
+    document.getElementById("ai").innerHTML=aiHTML;
+
+    // THREATS
+    let tHTML="";
+    if(data.threats && data.threats.length>0){
+        data.threats.forEach(t=>{
+            tHTML+=`<div class="finding">
+            <span>${t.type}</span>
+            <span class="badge high">${t.severity}</span></div>`;
+        });
+    } else {
+        tHTML="No attacks detected";
+    }
+    document.getElementById("threats").innerHTML=tHTML;
+
+    // CHART
     chart.data.labels.push(new Date().toLocaleTimeString());
     chart.data.datasets[0].data.push(data.risk_score);
     chart.update();
 
     // ACTIVITY
     document.getElementById("activity").innerHTML =
-        `<div>Analyzed → Risk: ${data.risk_score}</div>` +
+        `<div>Risk: ${data.risk_score}</div>` +
         document.getElementById("activity").innerHTML;
 }
-
-function showError(err) {
-    document.getElementById("loader").innerText = "Error: " + err;
-}
-
 </script>
 
 </body>
