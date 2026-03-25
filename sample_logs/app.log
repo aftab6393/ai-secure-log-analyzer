@@ -1,0 +1,5 @@
+INFO User login
+email=admin@company.com
+password=admin123
+api_key=sk-prod-xyz
+ERROR stack trace: NullPointerException
